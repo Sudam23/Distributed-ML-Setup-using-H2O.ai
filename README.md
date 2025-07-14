@@ -137,6 +137,13 @@ Ensure ports (e.g. 54323) are open across firewalls
 
 Nodes should be able to ping each other
 
+
+## 🖥️ Sample Visualization
+> Screenshots of the H2O cluster setup and Output of ML models.
+![Screenshot](Setup1.png)
+![Screenshot](Setup2.png)
+
+
 ## 📊 Results
 
 The Distributed Random Forest (DRF) model was evaluated on the Iris dataset using H2O.ai in a distributed cluster setup. The model was trained on 80% of the dataset and tested on the remaining 20% (27 samples).
