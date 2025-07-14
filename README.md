@@ -20,7 +20,7 @@ This project focuses on deploying a **Multinode H2O.ai cluster setup** for distr
 
 - To build and configure a distributed H2O.ai cluster using 2 nodes.
 - To leverage cluster-based computation for machine learning tasks.
-- To train and evaluate models (Iris dataset) using `H2ORandomForestEstimator`.
+- To train and evaluate models on Iris dataset using `H2ORandomForestEstimator`.
 - To provide a reusable, open, and academic framework for similar projects.
 
 ---
@@ -33,8 +33,6 @@ With the increasing need for scalable machine learning, traditional single-node 
 ## 📍 Course Project | Ramakrishna Mission Vivekananda Educational and Research Institute, Belur Math  
 🧠 Team: Tom and Jerry  
 👨‍💻 Members: Kanan Pandit , Sudam Paul  
-📅 Date: April 26, 2025
-
 
 
 ## 📁 Project Structure
@@ -96,11 +94,11 @@ Create a file called h2o_flatfile.txt in your environment directory with the fol
 ```
 Each line must contain a node's IP address in the cluster.
 ### 🚀 7. Start the H2O Cluster on Each Node
-# On Node 1 (Master):
+# On Node 1 :
 ```bash
 java -Xmx2g -jar h2o.jar -name trial1 -port 54323 \-flatfile h2o_flatfile.txt -network 172.20.252.0/24
 ```
-# On Node 2 (Worker):
+# On Node 2 :
 ```bash
 java -Xmx2g -jar h2o.jar -name trial1 -port 54323 \-flatfile h2o_flatfile.txt -network 172.20.252.0/24 \-peer 172.20.252.53:54323
 ```
