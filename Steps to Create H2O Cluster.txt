@@ -1,0 +1,84 @@
+Requirements:  i.   Java-version 8 or later upto 17
+               ii.  Python 3.12 
+              iii.  h2o updated version.
+              iv. ML related Libraries.
+
+========================================================================================================================================================
+
+
+Steps to Create H2O Cluster:
+
+         1. Create a Virtual Env in a folder and open the Env
+         2. sudo apt update
+         3. sudo apt install openjdk-11-jdk (H2O requires Java 8 or later)
+         4. Check Java Version by: java -version and javac -version
+         5. pip install h2o
+         6. For multinode setup download H2O Version manually: 
+            wget https://h2o-release.s3.amazonaws.com/h2o/3.46.0.7 -O h2o-latest.zip unzip h2o-latest.zip
+            
+            or, go to chrome and search by "h2o 3.46.07" and download the file and unzip it.
+         7. keep the unzip file in the folder in the directory of Virtual env.
+         8. move h2o.jar file from folder "h2o-3.46.0.6" to the directory of Virtual env.
+         9. Create a flatfile (named h2o_flatfile.txt contains all IP addresses of nodes which you want to make a cluster) and keep that file in the env location.
+         10.Run the code in termianl in env enviournment : java -Xmx2g -jar h2o.jar -name <give a Cluster Name> -port 54323 -flatfile h2o_flatfile.txt -network 172.20.252.0/24
+         11. open another terminal of env directory, activate Virtual Env and Run a ML Programme(e.g. sample_prog.py)
+         12. Shutdown the Cluster.    
+           
+           
+           
+Explanation of 10:           ============================================================================
+
+network 172.20.252.0/24
+ChatGPT said:
+The network address 172.20.252.0/24 you provided refers to a CIDR (Classless Inter-Domain Routing) notation, which specifies an IP address range.
+
+What does 172.20.252.0/24 mean?
+172.20.252.0 is the network address.
+/24 is the subnet mask, indicating that the first 24 bits of the IP address are used for the network portion, and the remaining 8 bits are used for the host portion.
+In practical terms:
+
+172.20.252.0/24 defines an IP range from 172.20.252.0 to 172.20.252.255 (inclusive), giving you 256 possible IP addresses in that subnet (172.20.252.1 to 172.20.252.254 are usable for devices/hosts).
+Breakdown:
+
+Subnet Mask: 255.255.255.0
+Usable IP Range: 172.20.252.1 to 172.20.252.254
+Broadcast Address: 172.20.252.255
+Network Address: 172.20.252.0
+This means that devices connected to this network will have IP addresses within this range, and they can communicate directly with each other without needing a router, as long as they're part of the same subnet.
+
+Use in H2O Setup
+
+If you're setting up an H2O cluster with the -network 172.20.252.0/24 option, you are specifying that H2O should discover and communicate with other nodes within the same IP range (172.20.252.1 to 172.20.252.254).
+
+Here’s how it works:
+
+The master node of the H2O cluster will be assigned an IP within the range (e.g., 172.20.252.53).
+The worker nodes should be in the same range and also be able to communicate with the master node (e.g., 172.20.252.54, 172.20.252.55, etc.).
+H2O will automatically try to discover and join the nodes within this subnet.
+Example of Using -network in H2O:
+If you have multiple nodes, you can use the -network option to ensure that your nodes are within the correct IP range. For example:
+=======================================================================================
+
+
+On Node 1 (Master Node):
+
+
+java -Xmx2g -jar h2o.jar -name trial1 -port 54323 -flatfile h2o_flatfile.txt -network 172.20.252.0/24
+
+
+On Node 2 (Worker Node):
+
+java -Xmx2g -jar h2o.jar -name trial1 -port 54323 -flatfile h2o_flatfile.txt -network 172.20.252.0/24 -peer 172.20.252.53:54323\
+
+
+In this example:
+
+Node 1 is the master and runs H2O with the IP range 172.20.252.0/24.
+Node 2 connects to the master node using the -peer option and will join the H2O cluster.
+
+
+Additional Considerations:
+
+Networking Setup: Make sure that all nodes in the cluster can ping each other and that no firewall is blocking communication on port 54323 (or whatever port H2O uses).
+Subnet Configuration: Ensure that your subnet is correctly configured and that all nodes are in the same network.
+Let me know if you need more details on configuring the network or H2O cluster setup!
