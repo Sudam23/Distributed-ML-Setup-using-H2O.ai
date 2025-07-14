@@ -12,7 +12,7 @@
 
 ## 🧭 Overview
 
-This project focuses on deploying a **Multinode H2O.ai cluster setup** for distributed machine learning. The cluster is used to train and evaluate models on real-world datasets efficiently. We showcase the entire setup from scratch: environment creation, H2O cluster formation, and executing a Random Forest classifier using Python.
+This project focuses on deploying a **Multinode H2O.ai cluster setup** for distributed machine learning. The cluster is used to train and evaluate models on real-world datasets efficiently. We showcase the entire setup from scratch: environment creation, H2O cluster formation, and executing a Random Forest classifier in Iris Dataset using Python.
 
 ---
 
