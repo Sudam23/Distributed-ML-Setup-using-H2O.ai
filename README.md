@@ -1,6 +1,6 @@
 # 🚀 Distributed Machine Learning & AutoML Using H2O.ai Cluster Setup
 
-> A hands-on project demonstrating how to build a distributed machine learning cluster using H2O.ai across multiple nodes.
+> A hands-on project demonstrating how to build a distributed machine learning cluster using H2O.ai across multiple nodes (here, 2 Nodes).
 
 [![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)](https://www.python.org/)
 [![H2O.ai](https://img.shields.io/badge/H2O.ai-Distributed%20ML-yellow?logo=dropbox)](https://www.h2o.ai/)
@@ -12,16 +12,16 @@
 
 ## 🧭 Overview
 
-This project focuses on deploying a **multinode H2O.ai cluster** for distributed machine learning. The cluster is used to train and evaluate models on real-world datasets efficiently. We showcase the entire setup from scratch: environment creation, H2O cluster formation, and executing a Random Forest classifier using Python.
+This project focuses on deploying a **Multinode H2O.ai cluster setup** for distributed machine learning. The cluster is used to train and evaluate models on real-world datasets efficiently. We showcase the entire setup from scratch: environment creation, H2O cluster formation, and executing a Random Forest classifier using Python.
 
 ---
 
 ## 🎯 Objective
 
-- To build and configure a distributed H2O.ai cluster
-- To leverage cluster-based computation for machine learning tasks
-- To train and evaluate models (Iris dataset) using `H2ORandomForestEstimator`
-- To provide a reusable, open, and academic framework for similar projects
+- To build and configure a distributed H2O.ai cluster using 2 nodes.
+- To leverage cluster-based computation for machine learning tasks.
+- To train and evaluate models (Iris dataset) using `H2ORandomForestEstimator`.
+- To provide a reusable, open, and academic framework for similar projects.
 
 ---
 
@@ -41,7 +41,7 @@ With the increasing need for scalable machine learning, traditional single-node 
 ## 📦 H2O_Cluster_Project
 
 
-- [`sample_prog.py`](./sample_prog.py) – ML model script using H2O  
+- [`Sample_prog_iris.py`](./sample_prog.py) – ML model script using H2O  
 - [`h2o_flatfile.txt`](./h2o_flatfile.txt) – IP list of nodes for H2O cluster  
 - [`Steps to Create H2O Cluster.txt`](./Steps%20to%20Create%20H2O%20Cluster.txt) – Step-by-step setup guide  
 - [`DML_H2O.pdf`](./DML_H2O.pdf) – Final academic project report  
@@ -103,7 +103,6 @@ java -Xmx2g -jar h2o.jar -name trial1 -port 54323 \-flatfile h2o_flatfile.txt -n
 # On Node 2 (Worker):
 ```bash
 java -Xmx2g -jar h2o.jar -name trial1 -port 54323 \-flatfile h2o_flatfile.txt -network 172.20.252.0/24 \-peer 172.20.252.53:54323
-(Replace 172.20.252.53 with your actual master node IP.)
 ```
 (Replace 172.20.252.53 with your actual master node IP.)
 
@@ -123,7 +122,7 @@ Broadcast	172.20.252.255
 ### 🧪 8. Run the ML Program
 Open a new terminal in the same environment and run your Python program:
 ```bash
-python sample_prog.py
+python Sample_prog_iris.py
 ```
 ### 🛑 9. Shutdown the H2O Cluster
 The cluster will automatically shut down if coded like this:
@@ -143,20 +142,6 @@ Nodes should be able to ping each other
 ## 📊 Results
 
 The Distributed Random Forest (DRF) model was evaluated on the Iris dataset using H2O.ai in a distributed cluster setup. The model was trained on 80% of the dataset and tested on the remaining 20% (27 samples).
-
----
-
-### 🔍 Model Performance Metrics
-
-| Metric                       | Value                                  |
-|------------------------------|----------------------------------------|
-| **Accuracy**                 | 92.59%                                 |
-| **MSE (Mean Squared Error)** | 0.0378                                 |
-| **RMSE (Root Mean Squared Error)** | 0.1945                         |
-| **LogLoss**                  | 0.1049                                 |
-| **Mean Per-Class Error**     | 0.1444                                 |
-| **Overall Error Rate**       | 7.41% (2 misclassifications out of 27) |
-| **AUC / AUCPR**              | Not computed (due to multiclass setup or auc_type=NONE) |
 
 ---
 
